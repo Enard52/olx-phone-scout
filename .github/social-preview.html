@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>olx-phone-scout social preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* 1280x640 GitHub social preview. Regenerate:
+     google-chrome --headless=new --hide-scrollbars --window-size=1280,640 --virtual-time-budget=15000 \
+       --screenshot=.github/social-preview.png .github/social-preview.html */
+  :root {
+    --bg: #0b1220; --surface: #131c2e; --border: #26334a;
+    --text: #eef2f7; --muted: #8a99b3; --accent: #2ee6a8; --warn: #f5b84b;
+    --sans: "Inter", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    width: 1280px; height: 640px; overflow: hidden; background: var(--bg); color: var(--text);
+    font-family: var(--sans); display: grid; grid-template-columns: 1fr 470px; gap: 56px;
+    padding: 72px 80px; position: relative;
+    background-image: radial-gradient(circle at 85% 20%, rgba(46,230,168,.12), transparent 45%);
+  }
+  main { align-self: center; margin-top: -24px; }
+  .eyebrow { font: 600 20px var(--mono); color: var(--accent); letter-spacing: .02em; }
+  h1 { white-space: nowrap; font-size: 66px; font-weight: 800; letter-spacing: -.035em; line-height: 1; margin: 18px 0 26px; }
+  .promise { font-size: 30px; line-height: 1.35; color: var(--text); max-width: 600px; }
+  .promise b { color: var(--accent); font-weight: 700; }
+  .stats { display: flex; gap: 14px; margin-top: 44px; flex-wrap: wrap; }
+  .stat { border: 1px solid var(--border); background: var(--surface); border-radius: 12px; padding: 12px 18px; }
+  .stat b { display: block; font-size: 26px; font-weight: 700; }
+  .stat span { font-size: 16px; color: var(--muted); }
+  .card {
+    align-self: center; background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+    padding: 28px 30px; font-family: var(--mono); font-size: 18px; line-height: 1.6;
+    box-shadow: 0 30px 60px rgba(0,0,0,.45);
+  }
+  .rank { color: var(--muted); font-size: 15px; letter-spacing: .08em; }
+  .model { font: 700 26px var(--sans); margin: 6px 0 4px; }
+  .price { font-size: 30px; font-weight: 600; color: var(--accent); }
+  .meta { color: var(--muted); font-size: 16px; }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 16px 0; }
+  .factor::before { content: "+ "; color: var(--accent); }
+  .warn { color: var(--warn); }
+  .warn::before { content: "! "; }
+  .foot { position: absolute; left: 80px; bottom: 40px; font: 400 17px var(--mono); color: var(--muted); }
+</style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">$ ./run.sh --location alm</div>
+    <h1>olx-phone-scout</h1>
+    <p class="promise">Finds the <b>best-value used phones</b> on OLX.kz: every listing, real specs, price against market value.</p>
+    <div class="stats">
+      <div class="stat"><b>6,557</b><span>listings in one run</span></div>
+      <div class="stat"><b>22</b><span>brands, typos too</span></div>
+      <div class="stat"><b>102</b><span>market prices</span></div>
+    </div>
+  </main>
+  <aside class="card" aria-label="Report entry from a real run">
+    <div class="rank">RANK #1 · 15k–80k KZT</div>
+    <div class="model">iPhone 11 Pro Max 256GB</div>
+    <div class="price">80,000 KZT</div>
+    <div class="meta">2019 · Б/у · Гульдала</div>
+    <hr>
+    <div class="factor">Ultra flagship tier</div>
+    <div class="factor">256GB storage</div>
+    <div class="factor">Battery 95%+</div>
+    <div class="factor">Excellent condition</div>
+    <div class="warn">Outside Almaty: travel</div>
+  </aside>
+  <div class="foot">github.com/octrow/olx-phone-scout · Python · MIT</div>
+</body>
+</html>

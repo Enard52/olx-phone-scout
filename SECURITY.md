@@ -3,7 +3,7 @@
 # Security policy
 
 Please report vulnerabilities privately through
-[GitHub security advisories](https://github.com/octrow/olx-almaty-phone-analyzer/security/advisories/new),
+[GitHub security advisories](https://github.com/octrow/olx-phone-scout/security/advisories/new),
 not in public issues. You'll get a reply within a week.
 
 Only the latest commit on `main` is supported.

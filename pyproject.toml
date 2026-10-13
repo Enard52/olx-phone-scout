@@ -1,5 +1,5 @@
 [project]
-name = "olx_almaty_phone_analyzer"
+name = "olx-phone-scout"
 version = "1.0.0"
 description = "Finds the best-value used phones on OLX.kz: scrapes listings, adds Kimovil specs, scores price against market value"
 readme = "README.md"

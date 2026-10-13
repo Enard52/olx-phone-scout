@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-OLX Almaty Phone Analyzer - Main Entry Point (Unified Async Pipeline)
+olx-phone-scout - Main Entry Point (Unified Async Pipeline)
 ======================================================================
 
 All-in-one async pipeline that orchestrates:
@@ -288,7 +288,7 @@ async def run_pipeline(args):
     Returns: dict with results of each step
     """
     logger.info("🚀" * 40)
-    logger.info("OLX ALMATY PHONE ANALYZER - UNIFIED ASYNC PIPELINE")
+    logger.info("OLX PHONE SCOUT - UNIFIED ASYNC PIPELINE")
     logger.info("🚀" * 40)
     logger.info(f"Session: {config.get_session_name()}")
     if config.INCLUDE_BUSINESS:
@@ -402,7 +402,7 @@ def apply_cli_overrides(args) -> None:
 def main():
     setup_env()
     parser = argparse.ArgumentParser(
-        description="OLX Almaty Phone Analyzer - Unified Async Pipeline",
+        description="olx-phone-scout - Unified Async Pipeline",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:

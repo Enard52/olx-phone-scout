@@ -1,1 +1,1 @@
-"""OLX Almaty Phone Analyzer - Main package."""
+"""olx-phone-scout - Main package."""

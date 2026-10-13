@@ -1,5 +1,5 @@
 """
-Integration tests for OLX Almaty Phone Analyzer
+Integration tests for olx-phone-scout
 
 Tests end-to-end workflows:
 - Configuration loading

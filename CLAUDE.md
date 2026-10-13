@@ -1,4 +1,4 @@
-# OLX Almaty Phone Analyzer
+# olx-phone-scout
 
 **AI-powered web scraper and analyzer for finding best phone deals on OLX.kz (Almaty, Kazakhstan)**
 
@@ -116,7 +116,7 @@ run.sh
 ## Project Structure
 
 ```
-/olx-almaty-phone-analyzer/
+/olx-phone-scout/
 ├── run.sh                          # Main entry point (wrapper)
 ├── main.py                         # Entry point (CLI + pipeline steps)
 ├── tests/                          # pytest (`uv run pytest`)

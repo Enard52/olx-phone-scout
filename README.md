@@ -1,6 +1,6 @@
-# OLX Almaty Phone Analyzer
+# olx-phone-scout
 
-[![CI](https://github.com/octrow/olx-almaty-phone-analyzer/actions/workflows/ci.yml/badge.svg)](https://github.com/octrow/olx-almaty-phone-analyzer/actions/workflows/ci.yml)
+[![CI](https://github.com/octrow/olx-phone-scout/actions/workflows/ci.yml/badge.svg)](https://github.com/octrow/olx-phone-scout/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)
 
@@ -31,8 +31,8 @@ Built for Almaty, works for any OLX.kz region.
 Needs Python 3.12+ and [uv](https://docs.astral.sh/uv/).
 
 ```bash
-git clone https://github.com/octrow/olx-almaty-phone-analyzer.git
-cd olx-almaty-phone-analyzer
+git clone https://github.com/octrow/olx-phone-scout.git
+cd olx-phone-scout
 uv sync
 ```
 

@@ -20,4 +20,4 @@ First public release.
 ### Fixed
 - The report showed the value score as "out of 100" (e.g. 190/100); it now shows raw points.
 
-[1.0.0]: https://github.com/octrow/olx-almaty-phone-analyzer/releases/tag/v1.0.0
+[1.0.0]: https://github.com/octrow/olx-phone-scout/releases/tag/v1.0.0
