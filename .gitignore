@@ -42,3 +42,5 @@ Thumbs.db
 # Local notes, scratch scripts and agent settings (not published)
 .local/
 .claude/
+.agents/
+skills-lock.json
