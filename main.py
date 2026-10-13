@@ -262,7 +262,7 @@ async def run_analyzer(  # noqa: PLR0913
             title = phone.get("title", "Unknown")[:60]
             discount = phone.get("discount_percent", 0)
 
-            logger.info(f"\n  #{i} | Score: {score:.1f}/100 | {price:,} KZT")
+            logger.info(f"\n  #{i} | Score: {score:.1f} pts | {price:,} KZT")
             logger.info(f"      {title}")
             if discount and discount > 0:
                 logger.info(f"      💎 {discount:.0f}% OFF market price")

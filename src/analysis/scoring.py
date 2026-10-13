@@ -22,7 +22,7 @@ The total score is calculated from multiple factors:
 - 🆕 Display Quality (0-20 points) [NEW Phase 2]
 - 🆕 Warranty/Seller (0-10 points) [NEW Phase 2]
 
-Maximum possible score: ~278 points (displayed as score/100)
+Maximum possible score: ~278 points before AI bonuses; the report shows raw points
 Typical high-value phone: 120-140 points
 """
 

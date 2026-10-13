@@ -1036,7 +1036,7 @@ class AndroidAnalyzer:
     def _write_phone_entry(self, f, phone: dict[str, Any], rank: int) -> None:
         """Write individual phone entry to report"""
         f.write(f"\n{'=' * 100}\n")
-        f.write(f"RANK #{rank} | VALUE SCORE: {phone['value_score']}/100\n")
+        f.write(f"RANK #{rank} | VALUE SCORE: {phone['value_score']} pts\n")
         f.write(f"{'=' * 100}\n\n")
 
         # Basic info (use normalized title if available)
@@ -1153,7 +1153,7 @@ def main():
     logger.info("=" * 80)
 
     for i, phone in enumerate(top_n[:10], 1):
-        logger.info(f"\n#{i} | Score: {phone['value_score']}/100 | {phone['price']:,} KZT")
+        logger.info(f"\n#{i} | Score: {phone['value_score']} pts | {phone['price']:,} KZT")
         logger.info(f"    {phone['title'][:75]}")
 
         if phone.get("discount_percent"):
