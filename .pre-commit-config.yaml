@@ -1,0 +1,66 @@
+repos:
+#  - repo: https://github.com/pycqa/isort
+#    rev: 7.0.0
+#    hooks:
+#      - id: isort
+#        args: [ '--profile', 'black', '--line-length', '100' ]
+
+  - repo: https://github.com/jendrikseipp/vulture
+    rev: 'v2.14'
+    hooks:
+      - id: vulture
+        args: [ '--min-confidence', '80' ]
+        exclude: ^(data|logs)/
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.3
+    hooks:
+      # Run the linter.
+      - id: ruff-check
+        language: system
+
+        args: [ --verbose, --fix, --config=pyproject.toml, ]
+        types: [ python ]
+        exclude: ^(data|logs)/
+
+      # Run the formatter.
+      - id: ruff-format
+        args: [ --verbose, --config=pyproject.toml, ]
+        language: system
+        types: [ python ]
+        exclude: ^(data|logs)/
+
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [ python ]
+        args: [ '--errors-only' ]
+        exclude: ^(data|logs)/
+
+      - id: mypy
+        name: mypy
+        entry: mypy
+        language: system
+        types: [ python ]
+        pass_filenames: false
+        args: [ '--ignore-missing-imports', '--python-version', '3.12', 'src', ]
+        exclude: ^(data|logs)/
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^(data|logs)/
+      - id: end-of-file-fixer
+        exclude: ^(data|logs)/
+      - id: check-yaml
+      - id: check-added-large-files
+        args: [ '--maxkb=1000' ]
+      - id: check-json
+        exclude: ^(data|logs)/
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: detect-private-key

@@ -1,0 +1,29 @@
+name: Bug report
+description: Something broke, a phone was misdetected or ranked wrong
+labels: [bug]
+body:
+  - type: textarea
+    id: command
+    attributes:
+      label: Command
+      description: The exact command you ran
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened and what you expected
+      description: For a wrong brand, model or price, paste the listing title and link
+    validations:
+      required: true
+  - type: textarea
+    id: config
+    attributes:
+      label: Output of `./run.sh --show-config`
+      render: text
+  - type: textarea
+    id: log
+    attributes:
+      label: Relevant lines from data/sessions/<session>/logs/
+      render: text

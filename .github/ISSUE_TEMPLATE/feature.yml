@@ -1,0 +1,10 @@
+name: Feature request
+description: A new region, brand, data source or scoring signal
+labels: [enhancement]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: What you are looking for and what the report misses
+    validations:
+      required: true

@@ -1,0 +1,33 @@
+{
+  "pythonVersion": "3.12",
+  "typeCheckingMode": "basic",
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+  "reportUnusedImport": "warning",
+  "reportUnusedVariable": "warning",
+  "reportDuplicateImport": "error",
+  "reportPrivateUsage": "warning",
+  "reportConstantRedefinition": "warning",
+  "reportArgumentType": "warning",
+  "reportCallIssue": "warning",
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__",
+    ".venv",
+    "venv",
+    ".mypy_cache",
+    ".ruff_cache",
+    "data",
+    "logs",
+    "**/.git",
+    "**/dist",
+    "**/build"
+  ],
+  "ignore": [
+    "data/**",
+    "logs/**"
+  ],
+  "stubPath": ".venv/lib/python3.12/site-packages",
+  "venvPath": ".",
+  "venv": ".venv"
+}
