@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="380" viewBox="0 0 1200 380" role="img" aria-labelledby="title desc">
+  <title id="title">Как устроен olx-phone-scout</title>
+  <desc id="desc">Три шага. Сбор: поиск OLX режется на ценовые срезы под лимит в 1000 результатов, всё сохраняется в all_listings.json. Перекатегоризация: бренд и модель из неаккуратных заголовков, 22 бренда с опечатками, разбивка на androids, iphones и unknown. Анализ: характеристики Kimovil и рыночная цена дают оценку, итог — отчёт TOP 50. Реальный прогон разобрал 6557 объявлений.</desc>
+
+  <rect width="1200" height="380" rx="26" fill="#0b1220"/>
+
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif">
+    <!-- step cards: 336 wide, 40 gap, starting at 56 -->
+    <g id="scrape" transform="translate(56 48)">
+      <rect width="336" height="236" rx="18" fill="#131c2e" stroke="#26334a"/>
+      <text x="28" y="44" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19" font-weight="600" fill="#2ee6a8">01 · --scrape</text>
+      <text x="28" y="88" font-size="30" font-weight="700" fill="#eef2f7">Все объявления</text>
+      <text x="28" y="126" font-size="20" fill="#c3cddd">Диапазон режется на</text>
+      <text x="28" y="154" font-size="20" fill="#c3cddd">срезы под лимит OLX</text>
+      <text x="28" y="182" font-size="20" fill="#c3cddd">в 1000 результатов</text>
+      <text x="28" y="214" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#8a99b3">→ all_listings.json</text>
+    </g>
+
+    <g id="recategorize" transform="translate(432 48)">
+      <rect width="336" height="236" rx="18" fill="#131c2e" stroke="#26334a"/>
+      <text x="28" y="44" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19" font-weight="600" fill="#2ee6a8">02 · --recategorize</text>
+      <text x="28" y="88" font-size="30" font-weight="700" fill="#eef2f7">Бренд + модель</text>
+      <text x="28" y="126" font-size="20" fill="#c3cddd">22 бренда, кириллица</text>
+      <text x="28" y="154" font-size="20" fill="#c3cddd">и опечатки: «xioami»</text>
+      <text x="28" y="182" font-size="20" fill="#c3cddd">«обмен на…» пропускается</text>
+      <text x="28" y="214" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#8a99b3">→ androids / iphones</text>
+    </g>
+
+    <g id="analyze" transform="translate(808 48)">
+      <rect width="336" height="236" rx="18" fill="#131c2e" stroke="#2ee6a8" stroke-opacity="0.6"/>
+      <text x="28" y="44" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19" font-weight="600" fill="#2ee6a8">03 · --analyze</text>
+      <text x="28" y="88" font-size="30" font-weight="700" fill="#eef2f7">Оценка выгоды</text>
+      <text x="28" y="126" font-size="20" fill="#c3cddd">Kimovil + рыночная цена,</text>
+      <text x="28" y="154" font-size="20" fill="#c3cddd">состояние, возраст;</text>
+      <text x="28" y="182" font-size="20" fill="#c3cddd">AI по желанию</text>
+      <text x="28" y="214" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#8a99b3">→ TOP_RECOMMENDATIONS</text>
+    </g>
+
+    <g id="arrows" stroke="#2ee6a8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M398 166 h28 m-9 -9 l9 9 l-9 9"/>
+      <path d="M774 166 h28 m-9 -9 l9 9 l-9 9"/>
+    </g>
+
+    <g id="real-run" transform="translate(56 312)">
+      <text x="0" y="28" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20" fill="#8a99b3">реальный прогон · Алматы с областью · 15–80 тыс. ₸ · <tspan fill="#eef2f7" font-weight="600">6557 объявлений</tspan> · топ-50</text>
+    </g>
+  </g>
+</svg>

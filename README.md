@@ -1,16 +1,37 @@
-# olx-phone-scout
+<p align="center">
+  <img src="assets/readme/hero.svg" width="100%" alt="olx-phone-scout: finds the best-value used phones on OLX.kz. Shown next to the title: the top entry of a real report, an iPhone 11 Pro Max 256GB for 80,000 KZT with its value factors">
+</p>
 
-[![CI](https://github.com/octrow/olx-phone-scout/actions/workflows/ci.yml/badge.svg)](https://github.com/octrow/olx-phone-scout/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)
+<p align="center">
+  <a href="https://github.com/octrow/olx-phone-scout/actions/workflows/ci.yml"><img src="https://github.com/octrow/olx-phone-scout/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
+  <img src="https://img.shields.io/badge/python-3.12%2B-blue.svg" alt="Python 3.12+">
+  <br>
+  <b>English</b> · <a href="README.ru.md">Русский</a>
+</p>
 
-**English** | [Русский](README.ru.md)
+A command-line tool for anyone buying a used phone on OLX.kz. It reads every listing in your price
+range, works out the brand and model from messy titles, adds specs from Kimovil, compares the asking
+price with the model's market price and writes a ranked report. Built for Almaty, works for any OLX.kz region.
 
-A command-line tool that finds the best-value used phones on OLX.kz. It scrapes every listing in a
-price range, works out the brand and model from messy titles, adds specs from Kimovil, compares the
-asking price with the model's market price and writes a ranked report.
+## A real run
 
-Built for Almaty, works for any OLX.kz region.
+The top of the report from `./run.sh --min-price 15000 --max-price 80000 --phone-type both --location alm`
+(6,557 listings analyzed), trimmed:
+
+```
+📱 iPhone 11 Pro Max (iPhone 11 Pro Max 256GB Gold)
+💰 PRICE: 80,000 KZT
+📅 RELEASE YEAR: 2019
+📍 LOCATION: Гульдала - 27 сентября 2026 г.
+⚠️  📍 OUTSIDE АЛМАТЫ: Гульдала, you'll need to travel
+
+⭐ VALUE FACTORS:
+   ⭐⭐⭐ Ultra Flagship
+   💾 Good 256GB storage
+   ✨ Excellent condition
+   🔋 Excellent battery (95%+)
+```
 
 ## What it does
 
@@ -25,6 +46,19 @@ Built for Almaty, works for any OLX.kz region.
   camera and condition. Implausible discounts are capped, out-of-town listings and shops are flagged.
 - **Optional AI pass.** Gemini, Cerebras or OpenRouter read the description (and optionally the photos)
   for defects and extras. No API key needed for the rest of the pipeline.
+
+## How it works
+
+<p align="center">
+  <img src="assets/readme/pipeline.svg" width="100%" alt="Pipeline: scrape every listing in price slices, detect brand and model, then score value with Kimovil specs and market prices into the top 50 report">
+</p>
+
+OLX and Kimovil both sit behind bot protection that checks the TLS fingerprint, not just headers.
+Requests go through [curl_cffi](https://github.com/lexiforest/curl_cffi) impersonating Chrome, with
+pacing and retries from [market-sources](https://github.com/octrow/market-sources). Kimovil pages are
+parsed with selectolax; no browser is involved.
+
+Architecture notes for contributors and coding agents are in [CLAUDE.md](CLAUDE.md).
 
 ## Install
 
@@ -70,22 +104,6 @@ Each run writes to a session folder named after its settings, e.g.
 - `reports/TOP_RECOMMENDATIONS_{timestamp}.txt`: the ranked, human-readable report
 - `logs/`: one log per pipeline step
 
-A trimmed entry from a real report (15k–80k KZT, Almaty region, 6557 listings analyzed):
-
-```
-📱 iPhone 11 Pro Max (iPhone 11 Pro Max 256GB Gold)
-💰 PRICE: 80,000 KZT
-📅 RELEASE YEAR: 2019
-📍 LOCATION: Гульдала - 27 сентября 2026 г.
-⚠️  📍 OUTSIDE АЛМАТЫ: Гульдала, you'll need to travel
-
-⭐ VALUE FACTORS:
-   ⭐⭐⭐ Ultra Flagship
-   💾 Good 256GB storage
-   ✨ Excellent condition
-   🔋 Excellent battery (95%+)
-```
-
 Kimovil specs are cached for all sessions in `data/cache/kimovil_specs.db`.
 
 ## Configuration
@@ -103,22 +121,6 @@ Defaults live in `src/core/config.py`; CLI flags override them.
 
 Kimovil pacing is in `src/core/constants.py`: `KIMOVIL_MAX_CONCURRENT = 2`,
 `KIMOVIL_REQUEST_DELAY = 2.5` s. Each model is fetched at most once per run.
-
-## How it works
-
-```
-main.py
- ├─ scrape        OLX search pages → all_listings.json      (src/core/async_scraper.py)
- ├─ recategorize  brand and model detection → androids/iphones/unknown.json   (src/detection/)
- └─ analyze       listing details, Kimovil specs, value score, optional AI → report   (src/analysis/)
-```
-
-OLX and Kimovil both sit behind bot protection that checks the TLS fingerprint, not just headers.
-Requests go through [curl_cffi](https://github.com/lexiforest/curl_cffi) impersonating Chrome, with
-pacing and retries from [market-sources](https://github.com/octrow/market-sources). Kimovil pages are
-parsed with selectolax; no browser is involved.
-
-Architecture notes for contributors and coding agents are in [CLAUDE.md](CLAUDE.md).
 
 ## Troubleshooting
 
