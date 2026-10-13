@@ -15,5 +15,9 @@ First public release.
 - Value scoring against hand-maintained market prices for 102 models.
 - Optional AI analysis via Gemini, Cerebras or OpenRouter.
 - Any OLX.kz region (`--location`), shops (`--include-business`), Android and iPhone (`--phone-type`).
+- Test suite: 454 tests covering the scraper, parser, brand detection, scoring and analyzer.
+
+### Fixed
+- The report showed the value score as "out of 100" (e.g. 190/100); it now shows raw points.
 
 [1.0.0]: https://github.com/octrow/olx-almaty-phone-analyzer/releases/tag/v1.0.0
