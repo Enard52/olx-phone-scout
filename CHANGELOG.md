@@ -4,6 +4,17 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [1.0.1] - 2026-10-15
+
+### Fixed
+- The console no longer prints a line for every HTTP request, page and listing: library logs below
+  WARNING go to the log files only, and progress bars stay intact.
+- File paths in the console output are shown relative to the repo, not as absolute paths.
+
+### Changed
+- CI: actions pinned by commit SHA; gitleaks, zizmor and OpenSSF Scorecard added.
+- README: demo GIF of a real run and a "How it differs" section.
+
 ## [1.0.0] - 2026-10-13
 
 First public release.
@@ -20,4 +31,5 @@ First public release.
 ### Fixed
 - The report showed the value score as "out of 100" (e.g. 190/100); it now shows raw points.
 
+[1.0.1]: https://github.com/octrow/olx-phone-scout/releases/tag/v1.0.1
 [1.0.0]: https://github.com/octrow/olx-phone-scout/releases/tag/v1.0.0
