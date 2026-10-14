@@ -16,7 +16,7 @@ class ListingParser:
 
     def _extract_description(self, soup: BeautifulSoup) -> str:
         """Extract full description from listing page."""
-        selectors = [
+        selectors: list[tuple[str, dict[str, Any]]] = [
             ("div", {"data-cy": "ad_description"}),
             ("div", {"class": "css-g5mtvm-Text"}),
             ("div", {"class": "descriptionContent"}),
@@ -38,7 +38,7 @@ class ListingParser:
     def _extract_photos(self, soup: BeautifulSoup) -> list[str]:
         """Extract all photo URLs from listing page."""
         photos = set()
-        selectors = [
+        selectors: list[tuple[str, dict[str, Any]]] = [
             ("img", {"data-cy": "photo-gallery-image"}),
             ("img", {"class": "css-1bmvjcs"}),
             ("div", {"data-cy": "adPhotos-swiperSlide"}),
@@ -65,7 +65,7 @@ class ListingParser:
     def _extract_details(self, soup: BeautifulSoup) -> dict[str, str]:
         """Extract structured details (parameters) from listing."""
         details = {}
-        param_selectors = [
+        param_selectors: list[tuple[str, dict[str, Any]]] = [
             ("li", {"data-cy": "parameters-item"}),
             ("div", {"class": "css-1m8pcey"}),
         ]

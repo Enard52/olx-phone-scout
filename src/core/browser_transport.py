@@ -5,9 +5,11 @@ impersonating Chrome's fingerprint passes. Plugging in at the transport level ke
 httpx (and PoliteClient's pacing/retries/redirects) unchanged on top.
 """
 
+from typing import cast
+
 import httpx
 from curl_cffi import CurlError
-from curl_cffi.requests import AsyncSession
+from curl_cffi.requests import AsyncSession, HttpMethod, Response
 
 IMPERSONATE = "chrome"
 # curl_cffi negotiates these itself and returns an already-decoded body. User-Agent comes from
@@ -18,7 +20,7 @@ _SKIP_RESPONSE_HEADERS = {"content-encoding", "content-length", "transfer-encodi
 
 class BrowserTransport(httpx.AsyncBaseTransport):
     def __init__(self, impersonate: str = IMPERSONATE) -> None:
-        self._session = AsyncSession(impersonate=impersonate)
+        self._session: AsyncSession[Response] = AsyncSession(impersonate=impersonate)
 
     async def handle_async_request(self, request: httpx.Request) -> httpx.Response:
         headers = {
@@ -27,7 +29,7 @@ class BrowserTransport(httpx.AsyncBaseTransport):
         timeout = request.extensions.get("timeout", {}).get("read")
         try:
             resp = await self._session.request(
-                request.method,
+                cast(HttpMethod, request.method),
                 str(request.url),
                 headers=headers,
                 data=await request.aread() or None,
@@ -37,7 +39,9 @@ class BrowserTransport(httpx.AsyncBaseTransport):
         except CurlError as exc:
             raise httpx.NetworkError(str(exc), request=request) from exc
         resp_headers = [
-            (k, v) for k, v in resp.headers.multi_items() if k.lower() not in _SKIP_RESPONSE_HEADERS
+            (k, v)
+            for k, v in resp.headers.multi_items()
+            if v is not None and k.lower() not in _SKIP_RESPONSE_HEADERS
         ]
         return httpx.Response(
             resp.status_code, headers=resp_headers, content=resp.content, request=request
