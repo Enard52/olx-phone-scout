@@ -4,6 +4,12 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [1.0.2] - 2026-10-15
+
+### Security
+- urllib3 (a transitive dependency) bumped from 2.7.0 to 2.8.0: fixes two high and one moderate
+  advisory in chunked response handling and HTTPS proxy TLS configuration.
+
 ## [1.0.1] - 2026-10-15
 
 ### Fixed
@@ -31,5 +37,6 @@ First public release.
 ### Fixed
 - The report showed the value score as "out of 100" (e.g. 190/100); it now shows raw points.
 
+[1.0.2]: https://github.com/octrow/olx-phone-scout/releases/tag/v1.0.2
 [1.0.1]: https://github.com/octrow/olx-phone-scout/releases/tag/v1.0.1
 [1.0.0]: https://github.com/octrow/olx-phone-scout/releases/tag/v1.0.0
