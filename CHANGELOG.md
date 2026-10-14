@@ -4,6 +4,13 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [1.0.3] - 2026-10-15
+
+### Changed
+- openai SDK 2.53 → 3.26 (used by the Cerebras/OpenRouter/Vercel pass). 3.x switched to HTTPX2 and
+  stopped installing httpx; the scraper keeps httpx as a direct dependency, so nothing else changes.
+- Minor and patch updates for 5 dependencies.
+
 ## [1.0.2] - 2026-10-15
 
 ### Security
@@ -37,6 +44,7 @@ First public release.
 ### Fixed
 - The report showed the value score as "out of 100" (e.g. 190/100); it now shows raw points.
 
+[1.0.3]: https://github.com/octrow/olx-phone-scout/releases/tag/v1.0.3
 [1.0.2]: https://github.com/octrow/olx-phone-scout/releases/tag/v1.0.2
 [1.0.1]: https://github.com/octrow/olx-phone-scout/releases/tag/v1.0.1
 [1.0.0]: https://github.com/octrow/olx-phone-scout/releases/tag/v1.0.0
