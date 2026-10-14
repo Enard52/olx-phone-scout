@@ -15,6 +15,10 @@ A command-line tool for anyone buying a used phone on OLX.kz. It reads every lis
 range, works out the brand and model from messy titles, adds specs from Kimovil, compares the asking
 price with the model's market price and writes a ranked report. Built for Almaty, works for any OLX.kz region.
 
+<p align="center">
+  <img src="assets/readme/demo.gif" width="100%" alt="A real run of ./run.sh --min-price 150000 --max-price 160000: 396 listings scraped in about 3 seconds, 117 Android phones scored, top 5 printed with their discounts from market price (played at 2.5x speed)">
+</p>
+
 ## A real run
 
 The top of the report from `./run.sh --min-price 15000 --max-price 80000 --phone-type both --location alm`
@@ -47,6 +51,15 @@ The top of the report from `./run.sh --min-price 15000 --max-price 80000 --phone
   camera and condition. Implausible discounts are capped, out-of-town listings and shops are flagged.
 - **Optional AI pass.** Gemini, Cerebras or OpenRouter read the description (and optionally the photos)
   for defects and extras. No API key needed for the rest of the pipeline.
+
+## How it differs
+
+- **OLX's own search** filters by price and sorts by date or price. It doesn't know what a model is
+  worth, so a cheap old phone and a well-priced recent flagship look alike, and "xioami 14 512/16" is
+  just a title.
+- **Price comparison sites** cover new phones in shops, not private used listings.
+- **Generic scrapers** give you raw listings. Brand detection, specs, scoring and getting past OLX's
+  TLS fingerprint check are left to you.
 
 ## How it works
 
