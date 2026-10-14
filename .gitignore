@@ -44,3 +44,7 @@ Thumbs.db
 .claude/
 .agents/
 skills-lock.json
+
+# Build output
+dist/
+build/
