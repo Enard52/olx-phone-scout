@@ -352,8 +352,8 @@ async def run_pipeline(args):
             logger.info(f"  • {operation.title()}: {status}")
 
         logger.info("")
-        logger.info(f"📂 Session directory: {config.get_session_dir()}")
-        logger.info(f"📊 Results: {config.get_results_dir()}")
+        logger.info(f"📂 Session directory: {config.display_path(config.get_session_dir())}")
+        logger.info(f"📊 Results: {config.display_path(config.get_results_dir())}")
         logger.info("")
 
         if success_count == total_count and total_count > 0:

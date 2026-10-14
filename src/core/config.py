@@ -102,6 +102,15 @@ BASE_DIR = Path(__file__).parent.parent.parent
 DATA_DIR = BASE_DIR / "data"
 
 
+def display_path(path: str | Path) -> Path:
+    """Path relative to the repo root for console output; paths outside the repo stay as is."""
+    p = Path(path)
+    try:
+        return p.relative_to(BASE_DIR)
+    except ValueError:
+        return p
+
+
 def get_readable_timestamp():
     """Get human-readable timestamp: 2025-10-28_14-30-52"""
     return dt.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -386,7 +395,7 @@ if __name__ == "__main__":
         logger.success("✅ Configuration is valid!\n")
         list_available_locations()
         logger.info(f"\n📍 Search URL: {get_search_url()}")
-        logger.info(f"\n📁 Session Directory: {get_session_dir()}")
+        logger.info(f"\n📁 Session Directory: {display_path(get_session_dir())}")
         logger.info(f"📝 Session Name: {get_session_name()}\n")
     else:
         logger.error("❌ Please fix configuration errors above.\n")

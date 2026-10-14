@@ -1010,7 +1010,7 @@ class AndroidAnalyzer:
                 ensure_ascii=False,
                 indent=2,
             )
-        logger.info(f"✅ Saved full analysis: {output_path}")
+        logger.info(f"✅ Saved full analysis: {config.display_path(output_path)}")
 
     def _save_top_phones(self, top_phones: list[dict[str, Any]], output_path: str) -> None:
         """Save top N phones to JSON file"""
@@ -1021,7 +1021,9 @@ class AndroidAnalyzer:
                 ensure_ascii=False,
                 indent=2,
             )
-        logger.info(f"✅ Saved top {config.TOP_RECOMMENDATIONS_COUNT}: {output_path}")
+        logger.info(
+            f"✅ Saved top {config.TOP_RECOMMENDATIONS_COUNT}: {config.display_path(output_path)}"
+        )
 
     def _write_report_header(self, f, total_count: int, top_count: int) -> None:
         """Write report header section"""
@@ -1124,7 +1126,7 @@ class AndroidAnalyzer:
             for i, phone in enumerate(top_n, 1):
                 self._write_phone_entry(f, phone, i)
 
-        logger.info(f"✅ Saved report: {paths['report']}")
+        logger.info(f"✅ Saved report: {config.display_path(paths['report'])}")
 
         return top_n
 

@@ -13,10 +13,15 @@ import logging
 import sys
 from collections.abc import Callable, Iterable, Sequence
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from loguru import logger
+from tqdm import tqdm
 
 from src.core import config
+
+if TYPE_CHECKING:
+    from loguru import Record
 
 # Default rotation/retention values (adjust to taste)
 DEFAULT_ROTATION = "10 MB"  # or "00:00" for daily
@@ -56,6 +61,21 @@ def module_matches_any(prefixes: Iterable[str]) -> Callable[[dict], bool]:
     return lambda record: any((record.get("module") or "").startswith(p) for p in prefixes)
 
 
+def _tqdm_safe_write(message: str) -> None:
+    # tqdm.write prints above active progress bars instead of breaking them
+    tqdm.write(message, end="", file=sys.stderr)
+
+
+def _console_filter(record: Record) -> bool:
+    return record["level"].no >= logging.WARNING or not record["extra"].get("stdlib")
+
+
+def _console_format(record: Record) -> str:
+    if record["level"].no >= logging.WARNING:
+        return "<level>{level}</level>: {message}\n{exception}"
+    return "{message}\n{exception}"
+
+
 # --- public API: configure_logging, get_logger, logger (loguru) ---
 def configure_logging(  # noqa: PLR0913
     *,
@@ -79,17 +99,12 @@ def configure_logging(  # noqa: PLR0913
     # Remove previous sinks to avoid duplicates (safe to call multiple times during tests)
     logger.remove()
 
-    # Console sink (human-friendly)
-    console_fmt = (
-        "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | "
-        "<level>{level: <8}</level> | "
-        "<cyan>{module}</cyan> - {message}"
-    )
-
+    # Console sink: plain messages from the app; library INFO/DEBUG (httpx requests) goes to files only
     logger.add(
-        sys.stderr,
+        _tqdm_safe_write,
         level=console_level,
-        format=console_fmt,
+        format=_console_format,
+        filter=_console_filter,
         colorize=True,
         backtrace=True,
         diagnose=False,
@@ -160,14 +175,16 @@ def configure_logging(  # noqa: PLR0913
 
             # Depth: pick a conservative depth so the real caller is shown.
             # If depth is off, increase/decrease; this is fine for async apps.
-            logger.opt(depth=6, exception=record.exc_info).log(level_name, record.getMessage())
+            logger.bind(stdlib=True).opt(depth=6, exception=record.exc_info).log(
+                level_name, record.getMessage()
+            )
 
     root = logging.getLogger()
     root.handlers[:] = [InterceptHandler()]
     root.setLevel(0)
 
     # Safe startup info via logger (goes to console + fallback file)
-    logger.info("Logging initialized; logs directory: {}", str(log_dir))
+    logger.debug("Logging initialized; logs directory: {}", str(log_dir))
 
 
 def get_logger(name: str):

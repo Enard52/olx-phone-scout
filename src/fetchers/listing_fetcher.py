@@ -17,7 +17,6 @@ from typing import Any
 import httpx
 from bs4 import BeautifulSoup
 from tqdm.asyncio import tqdm_asyncio
-from tqdm.contrib.logging import logging_redirect_tqdm
 
 from src.core import config
 from src.core.browser_transport import BrowserTransport
@@ -296,7 +295,7 @@ class ListingDetailFetcher(ListingParser):
             phone["details_fetched"] = True
 
             views = details.get("metadata", {}).get("views", 0)
-            logger.info(
+            logger.debug(
                 f"   ✅ Got {len(details['description'])} chars, {len(details['photos'])} photos, {views} views"
             )
             return "success", 1
@@ -349,17 +348,16 @@ class ListingDetailFetcher(ListingParser):
             logger.info(f"⚡ Executing {len(tasks)} concurrent HTTP requests...")
 
             # Use asyncio.gather with tqdm wrapper for progress
-            with logging_redirect_tqdm():
-                # keep return_exceptions default (False) because we handle exceptions in _process_batch_results
-                results = await tqdm_asyncio.gather(
-                    *tasks,
-                    desc="🌐 Fetching details (concurrent)",
-                    unit="listing",
-                    colour="blue",
-                    leave=False,
-                    position=0,
-                    dynamic_ncols=True,
-                )
+            # keep return_exceptions default (False) because we handle exceptions in _process_batch_results
+            results = await tqdm_asyncio.gather(
+                *tasks,
+                desc="🌐 Fetching details (concurrent)",
+                unit="listing",
+                colour="blue",
+                leave=False,
+                position=0,
+                dynamic_ncols=True,
+            )
 
             # Process results and update statistics
             self._process_batch_results(listings, results, max_listings, force_refetch, stats)

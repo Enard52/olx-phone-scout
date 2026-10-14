@@ -213,7 +213,7 @@ class KimovilScraper:
         self._inflight: dict[str, asyncio.Task[dict[str, Any] | None]] = {}
 
         logger.info("✅ Kimovil scraper initialized (curl_cffi + selectolax)")
-        logger.info(f"📦 Global cache: {self.cache_db}")
+        logger.info(f"📦 Global cache: {config.display_path(self.cache_db)}")
 
     def _init_cache_db(self) -> None:
         """Initialize SQLite cache database"""

@@ -26,7 +26,6 @@ from bs4 import BeautifulSoup
 from httpx import HTTPStatusError, RequestError
 from market_sources.polite_http import PoliteClient
 from tqdm.asyncio import tqdm_asyncio
-from tqdm.contrib.logging import logging_redirect_tqdm
 
 from src.core import config
 from src.core.browser_transport import BrowserTransport
@@ -206,7 +205,7 @@ class AsyncOLXScraper:
         if not self.client:
             raise RuntimeError("Client not initialized - use 'async with' context manager")
 
-        logger.info(f"📄 Fetching page {page}/{max_pages}...")
+        logger.debug(f"📄 Fetching page {page}/{max_pages}...")
         try:
             response = await self.client.get(url, params=params)
             self.ad_meta.update(parse_ad_meta(response.text))
@@ -282,17 +281,16 @@ class AsyncOLXScraper:
         # Use tqdm_asyncio.gather with total= so progress bar displays properly
 
         try:
-            with logging_redirect_tqdm():
-                results = await tqdm_asyncio.gather(
-                    *tasks,
-                    total=total_tasks,
-                    desc="📄 Fetching pages (concurrent)",
-                    unit="page",
-                    colour="cyan",
-                    leave=False,
-                    position=0,
-                    dynamic_ncols=True,
-                )
+            results = await tqdm_asyncio.gather(
+                *tasks,
+                total=total_tasks,
+                desc="📄 Fetching pages (concurrent)",
+                unit="page",
+                colour="cyan",
+                leave=False,
+                position=0,
+                dynamic_ncols=True,
+            )
 
             elapsed = time.time() - start_time
             logger.info(
@@ -502,7 +500,7 @@ class AsyncOLXScraper:
                 ensure_ascii=False,
                 indent=2,
             )
-        logger.info(f"✅ Saved all listings to: {output_file}")
+        logger.info(f"✅ Saved all listings to: {config.display_path(output_file)}")
 
     def _save_categories(
         self, iphones: list, androids: list, unknown: list, output_files: dict, results_dir: str
@@ -520,7 +518,7 @@ class AsyncOLXScraper:
         with unknown_path.open("w", encoding="utf-8") as f:
             json.dump({"count": len(unknown), "phones": unknown}, f, ensure_ascii=False, indent=2)
 
-        logger.info(f"✅ Saved categories to: {results_dir}")
+        logger.info(f"✅ Saved categories to: {config.display_path(results_dir)}")
 
     def _log_unknown_samples(self, unknown: list) -> None:
         """Log sample of unknown listings"""
@@ -553,7 +551,7 @@ class AsyncOLXScraper:
         # Save session info if using session directories
         if use_session_dir:
             session_info_file = config.save_session_info()
-            logger.info(f"✅ Saved session info to: {session_info_file}")
+            logger.info(f"✅ Saved session info to: {config.display_path(session_info_file)}")
 
         # Show unknown samples
         self._log_unknown_samples(unknown)
