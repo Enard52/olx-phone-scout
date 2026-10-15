@@ -4,6 +4,12 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [1.0.4] - 2026-10-15
+
+### Added
+- Published on PyPI (`uvx olx-phone-scout`) via trusted publishing.
+- Russian mirror of the code of conduct.
+
 ## [1.0.3] - 2026-10-15
 
 ### Changed
